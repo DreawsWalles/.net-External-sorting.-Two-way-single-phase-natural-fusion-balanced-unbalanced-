@@ -15,13 +15,16 @@ namespace project
     {
         public Button BtnOpen { get; set; }
         public Button BtnCreate { get; set; }
-        public Button BtnClose { get; set; }
+        public Button BtnCansel { get; set; }
         public Button BtnChar { get; set; }
         public Button BtnDouble { get; set; }
         public Button BtnString { get; set; }
         public Button BtnInt { get; set; }
         public Button BtnMyType { get; set; }
         public Button BtnFloat { get; set; }
+        public Button BtnColor { get; set; }
+        public Button BtnRu { get; set; }
+        public Button BtnEn { get; set; }
         public Label LblTitle { get; set; }
         public TextBox TextBox { get; set; }
         public ListBox listBox { get; set; }
@@ -46,6 +49,8 @@ namespace project
         /// </summary>
         public string[] Titles { get; set; }
         public int type { get; set; }
+        public string closeFormTitle { get; set; }
+        public string closeFormMessage { get; set; }
         string Name;
         string path;
         bool ok;
@@ -56,15 +61,18 @@ namespace project
         int DesignIsdefault;
 
         Size size;
-        public FrmLoadOrCreateFile(bool isEnglish, int designIsdefault)
+        public FrmLoadOrCreateFile()
         {
             InitializeComponent();
             type = -1;
+            BtnRu = buttonRu;
+            BtnEn = buttonEn;
+            BtnColor = buttonColor;
             listBox = listBox1;
             TextBox = textBox1;
             BtnOpen = buttonOpen;
             BtnCreate = buttonCreate;
-            BtnClose = buttonCansel;
+            BtnCansel = buttonCansel;
             BtnChar = button_char;
             BtnDouble = button_double;
             BtnString = button_string;
@@ -76,23 +84,21 @@ namespace project
             Titles = new string[2];
             size = Size;
 
-
-            history = new History(isEnglish);
+            set = new Settings();
+            IsEnglish = set.Node.IsEnglish;
+            DesignIsdefault = set.Node.DesignIsDefault;
+            history = new History(IsEnglish);
             history.LoadListBox(ref listBox1);
             listBox1.SelectedIndex = 0;
             listBox1.DoubleClick += ListBoxItem_DoubleClick;
 
-
-            Localization.LocalFrmLoadOrCreate(this, isEnglish);
-            //Designer.DesignerFrmLoadOrCreateFile(this, designIsdefault);
-            Designer.DesignerFrmLoadOrCreateFile(this, 1);
+            
+            Localization.LocalFrmLoadOrCreate(this, IsEnglish);
+            Designer.DesignerFrmLoadOrCreateFile(this, DesignIsdefault);
 
             TextBox.Text = textInput;
             TextBox.ForeColor = ColorTextInputWait;
             buttonCreate.Enabled = false;
-            IsEnglish = isEnglish;
-            DesignIsdefault = designIsdefault;
-            set = new Settings();
 
             ok = false;
 
@@ -100,6 +106,7 @@ namespace project
             MinimumSize = Size;
             FrmLoadOrCreateFile_SizeChanged(this, null);
 
+            buttonColor.BackColor = Color.FromArgb(45, 45, 48);
             listBox1.DrawMode = DrawMode.OwnerDrawFixed;
             listBox1.SelectedIndexChanged += new EventHandler(listBox_SelectedIndexChanged);
             button_char.MouseClick += buttonType_MouseClick;
@@ -159,13 +166,18 @@ namespace project
                 catch
                 { }
             }
+            buttonCansel.BackColor = EnterUnSelectItem;
+            buttonOpen.BackColor = EnterUnSelectItem;
+            buttonRu.BackColor = EnterUnSelectItem;
+            buttonEn.BackColor = EnterUnSelectItem;
+            buttonCreate.BackColor = EnterUnSelectItem;
             Button btn = (Button)sender;
             if (type == -1)
                 buttonCreate.Enabled = true;
             if (type != Convert.ToInt32(btn.Tag))
             {
                 btn.BackColor = EnterSelectItem;
-                    type = Convert.ToInt32(btn.Tag);
+                type = Convert.ToInt32(btn.Tag);
             }
             else
             {
@@ -319,14 +331,14 @@ namespace project
                 MessageBox.Show(textError[1], Titles[0], MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void listBox1_KeyUp(object sender, KeyEventArgs e)
+        private void form_KeyUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
             {
-                DialogResult result = MessageBox.Show("Завершить работу программы?", "Завершение работы",
+                DialogResult result = MessageBox.Show(closeFormMessage, closeFormTitle,
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
-                    Application.Exit();
+                    Close();
             }
         }
 

@@ -251,13 +251,13 @@ namespace project
         private void FrmMain_Load(object sender, EventArgs e)
         {
             set = new Settings();
-            if (set.isDefault)
+            if (set.isFirstRun)
             {
                 FrmSetting frm = new FrmSetting();
                 frm.ShowDialog();
                 set.Refresh(new SettingsNode(frm.isEnglish, frm.designIsDefault));
             }
-            FrmLoadOrCreateFile form = new FrmLoadOrCreateFile(set.Node.IsEnglish, set.Node.DesignIsDefault);
+            FrmLoadOrCreateFile form = new FrmLoadOrCreateFile();
             form.ShowDialog();
             set.Refresh();
         }

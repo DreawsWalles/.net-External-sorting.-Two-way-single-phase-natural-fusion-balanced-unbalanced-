@@ -118,6 +118,9 @@
     <EmbeddedResource Include="FrmInputFileName.resx">
       <DependentUpon>FrmInputFileName.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmSetting.resx">
+      <DependentUpon>FrmSetting.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmSortElements.resx">
       <DependentUpon>FrmSortElements.cs</DependentUpon>
     </EmbeddedResource>
@@ -145,7 +148,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Image\Color_circle_.png" />
+    <None Include="Image\Color_circle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Color_circle_dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Design\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Design\Dark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Image\Design\Light.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

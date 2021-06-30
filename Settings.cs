@@ -39,12 +39,12 @@ namespace project
     };
     public class Settings
     {
-        public SettingsNode Node { get; private set; }
-        public bool isDefault { get; private set; }
+        public SettingsNode Node { get; set; }
+        public bool isFirstRun { get; private set; }
 
         public Settings()
         {
-            isDefault = true;
+            isFirstRun = true;
             if (!Directory.Exists("System"))
             {
                 Directory.CreateDirectory("System");
@@ -59,7 +59,7 @@ namespace project
                 {
                     Node = new SettingsNode();
                     Node = Node.Read(file);
-                    isDefault = false;
+                    isFirstRun = false;
                 }
                 file.Close();
             }
@@ -78,7 +78,7 @@ namespace project
             {
                 Node = new SettingsNode();
                 Node = Node.Read(file);
-                isDefault = false;
+                isFirstRun = false;
             }
             file.Close();
         }

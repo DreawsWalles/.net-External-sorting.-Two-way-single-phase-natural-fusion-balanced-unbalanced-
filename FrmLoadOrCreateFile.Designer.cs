@@ -35,7 +35,6 @@
             this.labelTitle = new System.Windows.Forms.Label();
             this.buttonEn = new System.Windows.Forms.Button();
             this.buttonRu = new System.Windows.Forms.Button();
-            this.buttonColor = new System.Windows.Forms.Button();
             this.button_int = new System.Windows.Forms.Button();
             this.button_string = new System.Windows.Forms.Button();
             this.button_double = new System.Windows.Forms.Button();
@@ -43,6 +42,7 @@
             this.button_MyType = new System.Windows.Forms.Button();
             this.button_Float = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.buttonColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -58,6 +58,7 @@
             // 
             // buttonOpen
             // 
+            this.buttonOpen.FlatAppearance.BorderSize = 0;
             this.buttonOpen.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonOpen.Location = new System.Drawing.Point(516, 421);
             this.buttonOpen.Name = "buttonOpen";
@@ -82,6 +83,8 @@
             // 
             // buttonCansel
             // 
+            this.buttonCansel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.buttonCansel.FlatAppearance.BorderSize = 0;
             this.buttonCansel.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonCansel.Location = new System.Drawing.Point(615, 421);
             this.buttonCansel.Name = "buttonCansel";
@@ -103,6 +106,7 @@
             // 
             // buttonEn
             // 
+            this.buttonEn.FlatAppearance.BorderSize = 0;
             this.buttonEn.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonEn.Location = new System.Drawing.Point(897, 12);
             this.buttonEn.Name = "buttonEn";
@@ -114,6 +118,7 @@
             // 
             // buttonRu
             // 
+            this.buttonRu.FlatAppearance.BorderSize = 0;
             this.buttonRu.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.buttonRu.Location = new System.Drawing.Point(863, 13);
             this.buttonRu.Name = "buttonRu";
@@ -122,20 +127,6 @@
             this.buttonRu.Text = "RU";
             this.buttonRu.UseVisualStyleBackColor = true;
             this.buttonRu.Click += new System.EventHandler(this.buttonRu_Click);
-            // 
-            // buttonColor
-            // 
-            this.buttonColor.BackgroundImage = global::project.Properties.Resources.Color_circle_;
-            this.buttonColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonColor.FlatAppearance.BorderSize = 0;
-            this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonColor.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.buttonColor.Location = new System.Drawing.Point(834, 12);
-            this.buttonColor.Name = "buttonColor";
-            this.buttonColor.Size = new System.Drawing.Size(23, 23);
-            this.buttonColor.TabIndex = 7;
-            this.buttonColor.UseVisualStyleBackColor = true;
-            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
             // 
             // button_int
             // 
@@ -225,7 +216,21 @@
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(678, 384);
             this.listBox1.TabIndex = 0;
-            this.listBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.listBox1_KeyUp);
+            // 
+            // buttonColor
+            // 
+            this.buttonColor.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonColor.BackgroundImage = global::project.Properties.Resources.Color_circle;
+            this.buttonColor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonColor.FlatAppearance.BorderSize = 0;
+            this.buttonColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonColor.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.buttonColor.Location = new System.Drawing.Point(834, 12);
+            this.buttonColor.Name = "buttonColor";
+            this.buttonColor.Size = new System.Drawing.Size(23, 23);
+            this.buttonColor.TabIndex = 7;
+            this.buttonColor.UseVisualStyleBackColor = false;
+            this.buttonColor.Click += new System.EventHandler(this.buttonColor_Click);
             // 
             // FrmLoadOrCreateFile
             // 
@@ -249,9 +254,12 @@
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.buttonOpen);
             this.Controls.Add(this.textBox1);
+            this.KeyPreview = true;
             this.Name = "FrmLoadOrCreateFile";
             this.Text = "FrmLoadOrCreateFile";
             this.SizeChanged += new System.EventHandler(this.FrmLoadOrCreateFile_SizeChanged);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.form_KeyUp);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.form_KeyUp);
             this.ResumeLayout(false);
             this.PerformLayout();
 
